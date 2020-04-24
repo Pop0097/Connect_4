@@ -2,6 +2,7 @@ import java.util.*;
 import javax.swing.JFrame;
 import java.awt.*;
 
+
 public class Main {
 
 	static Scanner input = new Scanner(System.in);
@@ -34,46 +35,22 @@ public class Main {
 		print(board,frame, canvas, lastPlay, width, height);
 
 		boolean continueGame = true;
+		player = 1;
 		while(continueGame) {
-			//calls method so Player 1 can place a piece
-			player = 1;
+			if(player > 2) {
+				player = 1;
+			}
 			place(board, width, height, bottomR, player); //this method gets the input from the player and places a piece down in the appropriate spot.
 			print(board, frame, canvas, lastPlay, width, height);
 			turns++;
-
-			if(!playerCheck(board, width, height, player)) { //if Player1 has won, then game is over
-				lastPlay = 1; //sets this so program knows Player 1 has won
+			if(!playerCheck(board, width, height, player)) { //if the current player has won, then game is over
+				lastPlay = player; //sets this so program knows the current playerhas won
 				continueGame = false;
-				break;
-
 			}
-			if(turns == 49) { //if all turns are done, then game terminates
-
+			if(turns == 49) { //if all spots on the board are filled, but there is no winner, then game terminates
 				continueGame = false;
-				break;
-
 			}
-
-			//calls method so Player 2 can place a piece
-			player = 2;
-			place(board, width, height, bottomR, player);
-			print(board, frame, canvas, lastPlay, width, height);
-			turns++;
-
-
-			if(!playerCheck(board, width, height, player) || turns == 49) {//if Player 2 has won, then game is over
-
-				lastPlay = 2; //sets this so program knows Player 2 has won
-				continueGame = false;
-				break;
-
-			}
-			if(turns == 49) {//if all turns are done, then game terminates
-
-				continueGame = false;
-				break;
-
-			}
+			player++;
 		}
 
 		//determines winner based on who played the last play
@@ -117,12 +94,13 @@ public class Main {
 		 System.out.println("1 2 3 4 5 6 7");
 		 System.out.println();
 
-		 /*Part 2: this code is used for the graphics version of the game*/
+		 /*Part 2: this code is used for the graphics version of the game
 		 ((Drawing) canvas).addArray(board, lastPlay);//sends array to the Drawing class file
 		 canvas.setSize(702, 860);	//sizes the screen
 		 frame.add(canvas);
 		 frame.pack();
 		 frame.setVisible(true); //sets screen as visible
+		 */
 	 }
 
 	 public static char[][] place(char[][] board, int w, int h, int bottomR, int p){
@@ -387,6 +365,6 @@ public class Main {
 				 }
 			 }
 		 }
-		 return result; //break is used in case no winning combinations detected
+		 return result;
 	 }
 }
