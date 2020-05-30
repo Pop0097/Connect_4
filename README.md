@@ -1,4 +1,3 @@
 # Connect-4
-Connect 4 game in Java
 
-Small simple connect four game for two players :)
+Connect-4 game for two players played on a GUI (with text-based inputs).
